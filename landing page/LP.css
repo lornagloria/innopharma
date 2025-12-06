@@ -1,4 +1,18 @@
 /* LP.css — styling for Innopharma landing page */
+/* Cross-platform responsive design */
+
+/* CSS Variables for consistency */
+:root {
+  --primary-color: #39ff14;
+  --primary-dark: #1e1e2f;
+  --accent-orange: #2fc2b6;
+  --text-dark: #333;
+  --text-light: #777;
+  --card-radius: 15px;
+  --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 10px 20px rgba(0, 0, 0, 0.15);
+  --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
 
 /* Reset & base */
 * {
@@ -6,18 +20,28 @@
   padding: 0;
   box-sizing: border-box;
 }
-body {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  color: #333;
-  line-height: 1.6;
-  background-color: light gray; 
+
+html {
+  scroll-behavior: smooth;
 }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text-dark);
+  line-height: 1.6;
+  background-color: #f5f5f5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 a {
   text-decoration: none;
   color: inherit;
 }
+
 img {
   max-width: 100%;
+  height: auto;
   display: block;
 }
 
@@ -26,303 +50,604 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 40px;
-  background: rgb(87, 231, 68);;
+  padding: 16px 20px;
+  background: var(--primary-color);
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
+  box-shadow: var(--shadow-light);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+header .logo {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: clamp(1.2rem, 5vw, 1.8rem);
+  font-weight: bold;
+  color: white;
+  max-width: 80px;
+  height: auto;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
+header .logo img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+header nav {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex: 1;
+  min-width: 200px;
+}
+
+header nav a {
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  color: white;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  padding: 8px 12px;
   border-radius: 4px;
 }
-header .logo { 
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 1.8rem;
-  font-weight: bold;
-  color:orange; 
-  max-width: 12%;
-  height: 12%; 
-   border-radius: 4px;
+
+header nav a:hover,
+header nav a:focus {
+  color: var(--text-dark);
+  outline: none;
 }
-header nav a {
-  margin: 0 15px;
-  font-size: 1rem;
-  color: white;
-  font-weight: bold;
-  transition: color 0.2s;
+
+header .search_bar {
+  display: flex;
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
 }
-header nav a:hover {
-  color: #000;
-}
+
 header .search_bar input {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px; 
-  display: flex; 
-  gap: 30px; 
-  width: 120%; 
-  align-items: center; 
-}
-header .SignUp .SignUp_style {
-  margin-left: 15px;
-  padding: 8px 16px;
-  font-size: 0.9rem;
-  color: #fff;
-  background-color: #ff6b6b;
+  padding: 10px 14px;
   border: none;
-  border-radius: 7px;
-  cursor: pointer;
-  transition: background 0.2s;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 0.95rem;
+  background: white;
+  color: var(--text-dark);
+  transition: box-shadow 0.2s ease;
 }
-header .SignUp .SignUp_style:hover {
-  background-color: #ff4c4c;
+
+header .search_bar input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+header .SignUp {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+header .SignUp .SignUp_style {
+  padding: 10px 18px;
+  font-size: clamp(0.8rem, 2vw, 0.95rem);
+  color: white;
+  background-color: var(--accent-orange);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  touch-action: manipulation;
+}
+
+header .SignUp .SignUp_style:hover,
+header .SignUp .SignUp_style:focus {
+  background-color: #ff7140;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+  outline: none;
+}
+
+header .SignUp .SignUp_style:active {
+  transform: translateY(0);
 }
 
 /* --- DOCTOR / HERO SECTION --- */
 .doctor {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 40px 5% 0 5%; /* Removed bottom padding to merge with product bar */
-    min-height: 80vh;
-    position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px clamp(15px, 5%, 60px);
+  min-height: 60vh;
+  position: relative;
+  gap: 30px;
+  background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
 }
 
 .doctor_text {
-    flex: 1;
-    z-index: 2;
-    padding-right: 20px;
+  flex: 1;
+  z-index: 2;
+  min-width: 250px;
 }
 
 .doctor_text h1 {
-    font-size: 2.5rem;
-    line-height: 1.1;
-    color: orange; 
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: -1px;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  line-height: 1.2;
+  color: var(--accent-orange);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  font-weight: 700;
 }
 
 .doctor_text p {
-    color: black;
-    font-weight: bold; 
-    margin-bottom: 30px;
-    max-width: 400px;
-    line-height: 1.6;
+  color: var(--text-dark);
+  font-weight: 500;
+  margin-bottom: 30px;
+  max-width: 450px;
+  line-height: 1.7;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
 }
 
 /* The Main CTA Button */
 .doctor_text button {
-    background-color: var(--primary-dark);
-    color: rgb(13, 110, 9);
-    padding: 15px 35px;
-    border-radius: 12px;
-    border: none;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 10px 20px rgba(30, 30, 47, 0.3);
-    transition: transform 0.2s;
+  background-color: var(--primary-color);
+  color: var(--text-dark);
+  padding: 14px 32px;
+  border-radius: 10px;
+  border: none;
+  font-size: clamp(0.95rem, 2vw, 1rem);
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-medium);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-height: 48px;
+  touch-action: manipulation;
 }
 
-.doctor_text button:hover {
-    transform: translateY(-3px);
+.doctor_text button:hover,
+.doctor_text button:focus {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-heavy);
+  outline: none;
 }
 
-/* HERO IMAGE AREA */
+.doctor_text button:active {
+  transform: translateY(-1px);
+}
+
 /* HERO IMAGE AREA */
 .doctor_image {
-    flex: 1;
-    position: relative;
-    display: flex;
-    justify-content: center;
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 250px;
+  min-height: 350px;
 }
-
 
 /* The abstract colored circle behind the person */
 .doctor_image::before {
-    content: '';
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    background-color: rgb(255, 195, 66); /* Muted pastel tone */
-    border-radius: 50%;
-    z-index: 0;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0.5;
-} 
+  content: '';
+  position: absolute;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1;
+  background-color: #39ff14;
+  border-radius: 50%;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .image_placeholder {
-    z-index: 1;
-    width: 100%;
-    max-width: 500px;
-    height: auto;
+  z-index: 1;
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* STYLING THE IMAGE */
 #img5 {
-    width: 90%;
-    height: 90%;
-    /* Create a cutout effect or use a transparent PNG if possible. 
-       Since we have a box image, we add a nice border radius */
-    border-radius: 0 0 200px 200px; 
-    object-fit: cover;
-    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-    /* NOTE: If you have a transparent PNG of the girl, remove border-radius and mask */
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  border-radius: 180px 180px 180px 180px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
 }
 /* Products / Stats Section */
 .products_section {
-  padding: 60px 40px;
-   display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding: 0 5% 50px 5%;
-    margin-top: -80px; /* Pulls section up to overlap */
-    position: relative;
-    z-index: 10; 
-    color: rgb(80, 240, 65); 
-}
-/* --- PRODUCTS SECTION (The Dark Card Layout) --- */
-.products_section {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding: 0 5% 50px 5%;
-    margin-top: -80px; /* Pulls section up to overlap */
-    position: relative;
-    z-index: 10;
-    gap: 20px; 
-    color: black
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 40px clamp(15px, 5%, 60px);
+  gap: 20px;
+  position: relative;
+  z-index: 10;
+  background: #f5f5f5;
 }
 
 /* The Orange Box (100k+ Stats) */
 .stats_box {
-    background-color: orange;
-    color: white;
-    padding: 40px;
-    border-radius: var(--card-radius);
-    min-width: 200px;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-shadow: 0 15px 30px rgba(255, 140, 90, 0.4);
-    border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-orange) 0%, #ff9968 100%);
+  color: white;
+  padding: clamp(25px, 5vw, 40px);
+  border-radius: var(--card-radius);
+  min-width: 160px;
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: var(--shadow-medium);
+  transition: transform 0.3s ease;
+}
+
+.stats_box:hover {
+  transform: translateY(-5px);
 }
 
 .stats_box h2 {
-    font-size: 2.5rem;
-    margin-bottom: 5px;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  margin-bottom: 8px;
+  font-weight: 700;
 }
 
 .stats_box p {
-    font-size: 0.75rem;
-    opacity: 0.9;
+  font-size: clamp(0.8rem, 2vw, 0.95rem);
+  opacity: 0.95;
+  font-weight: 500;
 }
 
 /* The Dark Product Container */
 .product_list {
-    background-color: rgb(100, 245, 33);
-    border-radius: 20px;
-    padding: 30px;
-    flex: 1; /* Takes remaining width */
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    flex-wrap: wrap;
-    gap: 13px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #64f521 100%);
+  border-radius: var(--card-radius);
+  padding: 25px clamp(15px, 3vw, 30px);
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  box-shadow: var(--shadow-medium);
 }
 
-/* Individual Product Cards (White cards inside dark box) */
+/* Individual Product Cards (White cards inside) */
 .product_card {
-    background-color: white;
-    padding: 15px;
-    border-radius: 15px;
-    width: 160px;
-    text-align: center;
-    transition: transform 0.3s ease;
-    position: relative;
+  background-color: white;
+  padding: 15px;
+  border-radius: 12px;
+  width: 140px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow: var(--shadow-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  touch-action: manipulation;
 }
 
-.product_card:hover {
-    transform: translateY(-10px);
+.product_card:hover,
+.product_card:focus-within {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-heavy);
 }
 
-/* Plus button simulation on cards */
+/* Plus button on cards */
 .product_card::after {
-    content: '+';
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #eee;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+  content: '+';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #e8e8e8;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--text-dark);
+  transition: all 0.2s ease;
+}
+
+.product_card:hover::after {
+  background: var(--accent-orange);
+  color: white;
 }
 
 .product_card img {
-    width: 100%;
-    height: 100px;
-    object-fit: cover; /* Ensures images fit neatly */
-    border-radius: 10px;
-    margin-bottom: 10px;
-    background-color: #f0f0f0;
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background-color: #f0f0f0;
 }
 
 .product_card p {
-    font-size: 0.85rem;
-    font-weight: 700;
-    margin-bottom: 5px;
-    color: var(--primary-dark);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: var(--text-dark);
+}
+
+.product_card span {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-weight: 500;
 } 
 
 
 /* Footer */
 footer {
-  padding: 20px 40px;
+  padding: 30px clamp(15px, 5%, 60px);
   text-align: center;
-  background: #fafafa;
-  color: #777;
-  font-size: 0.9rem;
+  background: var(--primary-dark);
+  color: white;
+  font-size: clamp(0.85rem, 2vw, 0.95rem);
+  margin-top: 40px;
+  border-top: 4px solid var(--accent-orange);
 }
 
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-  section.doctor {
+footer p {
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+
+/* Tablet (768px and below) */
+@media (max-width: 768px) {
+  .doctor {
     flex-direction: column-reverse;
     text-align: center;
+    min-height: auto;
+    padding: 30px clamp(15px, 5%, 40px);
   }
-  .doctor .doctor_text, .doctor .doctor_image {
-    max-width: 100%;
+
+  .doctor_text {
+    padding: 0;
   }
-  .doctor .doctor_text h1 {
-    font-size: 2.2rem;
+
+  .doctor_text h1 {
+    margin-bottom: 15px;
   }
-  .doctor .doctor_text button {
-    margin-top: 20px;
+
+  .doctor_image {
+    width: 100%;
+    min-height: 300px;
+    margin-bottom: 20px;
+  }
+
+  .doctor_image::before {
+    max-width: 300px;
+  }
+
+  #img5 {
+    max-width: 300px;
+  }
+
+  .products_section {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 30px clamp(15px, 5%, 40px);
+  }
+
+  .stats_box {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .product_list {
+    width: 100%;
+    min-width: auto;
+    justify-content: center;
+  }
+
+  header nav {
+    order: 3;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  header .search_bar {
+    order: 4;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  header .SignUp {
+    order: 5;
+    width: 100%;
+    margin-top: 10px;
   }
 }
-@media (max-width: 600px) {
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
   header {
-    flex-wrap: wrap;
-    justify-content: center;
+    padding: 12px 15px;
   }
+
+  header .logo {
+    max-width: 60px;
+    order: 1;
+  }
+
   header nav {
-    margin-top: 15px;
-  }
-  header .search_bar, header .SignUp {
-    margin-top: 10px;
+    order: 2;
+    gap: 8px;
     width: 100%;
-    display: flex;
-    justify-content: center;
+    margin-top: 10px;
+    font-size: 0.8rem;
   }
+
+  header nav a {
+    padding: 6px 10px;
+    margin: 0;
+  }
+
+  header .search_bar {
+    order: 3;
+    width: 100%;
+    margin-top: 8px;
+  }
+
   header .search_bar input {
-    width: 60%;
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  header .SignUp {
+    order: 4;
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  header .SignUp .SignUp_style {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    min-height: 44px;
+  }
+
+  .doctor {
+    padding: 20px 15px;
+  }
+
+  .doctor_text h1 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+  }
+
+  .doctor_text p {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+
+  .doctor_text button {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+    min-height: 44px;
+  }
+
+  .doctor_image {
+    min-height: 250px;
+  }
+
+  .doctor_image::before {
+    max-width: 250px;
+  }
+
+  #img5 {
+    max-width: 250px;
+  }
+
+  .products_section {
+    padding: 20px 15px;
+    gap: 15px;
+  }
+
+  .stats_box {
+    padding: 20px;
+  }
+
+  .stats_box h2 {
+    font-size: 1.8rem;
+  }
+
+  .product_card {
+    width: 120px;
+  }
+
+  .product_card img {
+    height: 80px;
+  }
+
+  .product_card p {
+    font-size: 0.85rem;
+  }
+
+  .product_card span {
+    font-size: 0.75rem;
+  }
+
+  footer {
+    padding: 20px 15px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Large Desktop (1200px and above) */
+@media (min-width: 1200px) {
+  .doctor {
+    min-height: 70vh;
+  }
+
+  .doctor_image {
+    min-height: 500px;
+  }
+
+  .doctor_image::before {
+    max-width: 550px;
+  }
+
+  #img5 {
+    max-width: 480px;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  button {
+    min-height: 48px;
+    padding: 14px 24px;
+  }
+
+  .product_card {
+    padding: 12px;
+  }
+
+  .product_card::after {
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+  }
+}
+
+/* Print styles */
+@media print {
+  header,
+  footer {
+    display: none;
+  }
+
+  .doctor {
+    page-break-inside: avoid;
+  }
+
+  .products_section {
+    page-break-inside: avoid;
   }
 }
